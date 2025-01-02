@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { Button, Box, Text, Input, Icon } from '@chakra-ui/react'
+import ColorModeSwitcher from '../components/ColorModeSwitcher'
+import { FaGoogle } from 'react-icons/fa'
 
 const LoginPage = () => {
   // const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -59,25 +62,48 @@ const LoginPage = () => {
 
   return (
     <div>
-      <input
-        type='email'
-        placeholder='Email'
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type='password'
-        placeholder='Password'
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type='password'
-        placeholder='Confirm Password'
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <button onClick={handleRegister}>Register</button>
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleGoogleLogin}>Login with Google</button>
+      <ColorModeSwitcher />
+      <Box margin={2}>
+        <Text>Email</Text>
+        <Input
+          type='email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Box>
+      <Box margin={2}>
+        <Text>Password</Text>
+        <Input
+          type='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Box>
+      {!!password && (
+        <Box margin={2}>
+          <Text>Password</Text>
+          <Input
+            type='password'
+            placeholder='Confirm Password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Box>
+      )}
+      <Button bg='gray.400' margin={2} onClick={handleRegister}>
+        Register
+      </Button>
+      <Button bg='gray.400' margin={2} onClick={handleLogin}>
+        Login
+      </Button>
+      <Button
+        bg='gray.400'
+        margin={2}
+        leftIcon={<Icon as={FaGoogle} />}
+        onClick={handleGoogleLogin}
+      >
+        Login with Google
+      </Button>
     </div>
   )
 }
